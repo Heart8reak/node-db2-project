@@ -12,6 +12,9 @@
     },
     "dependencies": {
         "express": "^4.17.1",
-        "helmet": "^3.22.0"
+        "helmet": "^3.22.0",
+        "knex": "^0.21.1",
+        "sqlite": "^4.0.8",
+        "sqlite3": "^4.2.0"
     }
 }
