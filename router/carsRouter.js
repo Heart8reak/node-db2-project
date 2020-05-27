@@ -40,22 +40,15 @@ router.post('/', (req, res) => {
         })
 })
 
-router.patch("/:id", (req, res) => {
-    const changes = req.body
+router.put("/:id", async (req, res) => {
+    const carData = req.body
     const { id } = req.params
-    db('cars')
-        .where({ id })
-        .update * changes
-            .then(num => {
-                if (num > 0) {
-                    res.status(200).json({ message: 'Updated Successfully' })
-                } else {
-                    res.status(404).json({ message: 'Error with updating' })
-                }
-            })
-            .catch(err => {
-                res.status(500).json({ error: 'error' })
-            })
+    try {
+        const car = await db('cars').where({id}).update(carData)
+        res.status(201).json(car)
+    } catch(error) {
+        res.status(500).json({message: 'Internal Server Error', err: err.message})
+    }
 })
 
 router.delete("/:id", (req, res) => {
